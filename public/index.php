@@ -1,6 +1,13 @@
 <?php
-require ('../app/Container.php');
+session_start();
+require ('../autoloader.php');
+require('../App/Container.php');
+require ('../helpers.php');
 
-$app = new \App\Container();
+    $app = new \App\Container();
 
-var_dump($app);
+    $app->getConnection('mysql');
+    $app->getRequest();
+    $app->getQueryBuilder()->where();
+    $app->getView()->show('layout/main.php',['hello'=>"name "]);
+
