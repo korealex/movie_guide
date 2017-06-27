@@ -9,6 +9,7 @@
 class Container
 {
     protected $db_config;
+    protected $request;
 
 
     function __construct()
