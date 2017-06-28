@@ -9,6 +9,14 @@ require ('../helpers.php');
 
     $app->getConnection('mysql');
     $app->getRequest();
-    $app->getQueryBuilder()->where();
-    $app->getView()->show('template/search.php',['hello'=>"name "]);
+//    $app->getQueryBuilder()->where();
+if($app->getRequest()->has('search')){
+    $url = "https://api.thetvdb.com/search/series?name=".$app->getRequest()->get('search');
+    $header = [  'Accept: application/json' ,'Content-type: application/json','Authorization: Bearer '.getenv('TVDB_TOKEN')];
+    $response = (new \App\Http\Client())->get($url,$header);
+    dd($response);
+}
+$app->getView()->show('template/search.php',['hello'=>"name "]);
+
+
 
