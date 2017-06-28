@@ -13,7 +13,7 @@ class View
 {
     function show($view, $data = []){
         extract($data);
-        $display = include('../views/'.$view);
+        $display = include_once('../views/'.$view);
         return $display;
     }
 

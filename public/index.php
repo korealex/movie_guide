@@ -1,5 +1,6 @@
 <?php
 session_start();
+require ('../env.php');
 require ('../autoloader.php');
 require('../App/Container.php');
 require ('../helpers.php');
@@ -9,5 +10,5 @@ require ('../helpers.php');
     $app->getConnection('mysql');
     $app->getRequest();
     $app->getQueryBuilder()->where();
-    $app->getView()->show('layout/main.php',['hello'=>"name "]);
+    $app->getView()->show('template/search.php',['hello'=>"name "]);
 
