@@ -18,11 +18,12 @@ TVshowCard = function (data) {
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
-                                <p class="title is-4">${this.seriesName}</p>
+                                <p class="title is-4"><strong>${this.seriesName}</strong></p>
                                 <p class="subtitle is-6">${this.network}</p>
                                 
                             </div>
-                        </div>
+                        </div>git commint 2017
+                        
                        
                     </div>
                 </div>
