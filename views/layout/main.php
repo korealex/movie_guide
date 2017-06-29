@@ -27,7 +27,9 @@
 
 
 <script src="/assets/js/jquery-3.2.1.js"></script>
+<script src="//unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/assets/js/index.js"></script>
+<script src="/assets/js/models/Series.js"></script>
 <?php if(isset($scripts)){
     echo $scripts;
 }?>
