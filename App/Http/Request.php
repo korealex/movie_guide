@@ -25,6 +25,9 @@ class Request
     public function get($key){
         return $this->input[$key];
     }
+    public function has($key){
+        return (isset($this->input[$key]) && !empty($this->input[$key]));
+    }
     public function all(){
         return $this->input;
     }
