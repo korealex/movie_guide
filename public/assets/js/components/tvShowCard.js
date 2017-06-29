@@ -20,12 +20,10 @@ TVshowCard = function (data) {
                             <div class="media-content">
                                 <p class="title is-4">${this.seriesName}</p>
                                 <p class="subtitle is-6">${this.network}</p>
+                                
                             </div>
                         </div>
-                        <div class="content">${this.overview}
-                            <br>
-                            <small>${this.firstAired}</small>
-                        </div>
+                       
                     </div>
                 </div>
             </div>`;
