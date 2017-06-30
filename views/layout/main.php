@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title ?? "Movie Guide";?></title>
+    <link rel="stylesheet" href="/assets/css/jquery-ui.css">
     <link rel="stylesheet" href="/assets/css/bulma.css">
     <link rel="stylesheet" href="/assets/css/cosmo-bulmaswatch.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -29,6 +30,7 @@
 }?>
 
 <script src="/assets/js/jquery-3.2.1.js"></script>
+<script src="/assets/js/jquery-ui.js"></script>
 <script src="/assets/js/index.js"></script>
 <script src="/assets/js/models/Series.js"></script>
 <script src="/assets/js/components/tvShowCard.js"></script>

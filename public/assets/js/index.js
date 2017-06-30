@@ -35,10 +35,9 @@ $(document).ready(function () {
         var tvShows = [];
         if(tvShows.length == 0){
 
-            $('#TVshows .columns .column').removeClass('fadeInUp');
-            $('#TVshows .columns .column').addClass('fadeOut');
+            $('#TVshows .columns .column').removeClass('fadeInUp').addClass('fadeOut',200);
 
-            $('#TVshows .columns').html('No Results');
+
         }
     }
     var loadShows = function (callback) {
@@ -50,12 +49,13 @@ $(document).ready(function () {
 
     unloadShows();
 
+
     $('#search').keyup(function () {
         var content = $(this).val();
         if(content.length>3){
             console.log('searching for: ' + content)
             $('.search-container').addClass('is-loading');
-            
+
             var cardContent = loadShows(function (tvShows) {
                 var  tvShowsCardContent = tvShows.map(function (show) {
                     var card =  new TVshowCard(show);

@@ -8,7 +8,7 @@ TVshowCard = function (data) {
     this.network = data.network;
     this.firstAired = data.firstAired;
     this.getCard = function () {
-        return `<div class="column is-3 animated fadeInUp">
+        return `<div class="column is-3 animated fadeIn">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-16by9">
@@ -22,8 +22,7 @@ TVshowCard = function (data) {
                                 <p class="subtitle is-6">${this.network}</p>
                                 
                             </div>
-                        </div>git commint 2017
-                        
+                        </div>
                        
                     </div>
                 </div>

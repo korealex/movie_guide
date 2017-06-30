@@ -10,18 +10,25 @@ class QueryBuilder
 {
     function __construct(array $config)
     {
-        $this->connection = new \PDO('mysql:host=localhost;dbname=movies;port=3306','movies','movies');
+        $this->connection = new \PDO(
+            sprintf('mysql:host=%s;dbname=%s;port=%s', getenv('DB_HOST'), getenv('DB_NAME'), getenv('DB_PORT')),
+            getenv('DB_USER'), getenv('DB_PASS'));
 
     }
 
-    public function where(){
+    public function where()
+    {
         $query = $this->connection->query('select * from movie where id = 1');
         return $query->fetch(\PDO::FETCH_OBJ);
     }
-    public function create(){
+
+    public function create()
+    {
 
     }
-    public function delete(){
+
+    public function delete()
+    {
 
     }
 
