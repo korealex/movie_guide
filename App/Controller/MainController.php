@@ -1,5 +1,7 @@
 <?php namespace App\Controller;
 
+use App\Container;
+
 /**
  * Created by PhpStorm.
  * User: al
@@ -8,5 +10,12 @@
  */
 class MainController
 {
+    protected $app;
+    protected $request;
+    function __construct(Container $app)
+    {
+        $this->app = $app;
+    }
+
 
 }

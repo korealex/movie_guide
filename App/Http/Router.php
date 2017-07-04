@@ -14,22 +14,17 @@ class Router
     function __construct()
     {
         $this->request = new Request();
-
     }
 
-    public function get($uri,$closure){
+    public function get($uri,\Closure $closure){
        $this->routes[$uri] = $closure;
     }
 
     public function run(){
-        return $this->routes[$this->request->uri]();
+        if (array_key_exists($this->request->uri,$this->routes)){
+            return  $this->routes[$this->request->uri]();
+        }else{
+            throw new \Exception('Http url not found');
+        }
     }
-
-
-
-
-
-
-
-
 }

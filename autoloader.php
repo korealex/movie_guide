@@ -6,6 +6,9 @@
  * Time: 01:29 AM
  */
 
+include_once (__DIR__.'/App/Controller/MainController.php');
+include_once (__DIR__.'/App/Controller/TvShowController.php');
+include_once (__DIR__.'/App/Controller/DBController.php');
 include_once (__DIR__.'/App/Http/Router.php');
 include_once (__DIR__.'/App/Http/Request.php');
 include_once (__DIR__.'/App/Http/Client.php');

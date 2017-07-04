@@ -20,9 +20,7 @@ class Container
 
     function __construct()
     {
-        $this->db_config = require('../config/database.php');
         $this->request = new Request();
-        $this->builder = new QueryBuilder($this->connection('mysql'));
         $this->view = new View();
     }
 
