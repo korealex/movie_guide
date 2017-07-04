@@ -1,38 +1,32 @@
 <?php
 session_start();
-include_once ('../env.php');
-include_once ('../autoloader.php');
-include_once('../App/Container.php');
-include_once ('../helpers.php');
+try{
 
-$app = new \App\Container();
+    include_once ('../env.php');
+    include_once ('../autoloader.php');
+    include_once('../App/Container.php');
+    include_once ('../helpers.php');
 
-//    $app->connection('mysql');
-//    $app->getQueryBuilder()->where();
-if($app->request()->has('search')){
-    $url = "https://api.thetvdb.com/search/series?name=".urlencode($app->request()->get('search'));
-    $header = [  'Accept: application/json' ,'Content-type: application/json','Authorization: Bearer '.getenv('TVDB_TOKEN')];
-    $response = (new \App\Http\Client())->get($url,$header);
+    $app = new \App\Container();
+    $routes = new \App\Http\Router();
 
+    $routes->get('/',function ()use($app){
+        return $app->view()->show('template/search.php',['hello'=>"name "]);
+    });
 
-
-    $response_mod = array_map('mapResponse',$response['data']);
-    header('Content-Type: application/json');
-    echo  json_encode($response_mod);
-}elseif ($app->request()->has('query')){
-
-    /**
-     * ('id', `firstAired`, `network`, `overview`, `seriesName`, `status`) VALUES ('82066', '2008-08-26', 'FOX (US)', 'The series follows a Federal Bureau of Investigation \\"Fringe Division\\" team based in Boston. The team uses unorthodox \\"fringe\\" science and FBI investigative techniques to investigate a series of unexplained, often ghastly occurrences, some of which are related to mysteries surrounding a parallel universe.', 'Fringe', 'Ended');
-     */
-    $array = [
-        'id'=>887841,
-        'firstAired'=>'2008-08-26',
-        'network'=>'1FOX (US)',
-        'overview'=> '1The series follows a Federal Bureau of Investigation \\"Fringe Division\\" team based in Boston. The team uses unorthodox \\"fringe\\" science and FBI investigative techniques to investigate a series of unexplained, often ghastly occurrences, some of which are related to mysteries surrounding a parallel universe.',
-        'seriesName'=> '1Fringes',
-        'status'=>'1Ended'
-    ];
-    $image_arr = ['id'=>144782, 'subKey'=>"12", 'fileName'=>'dsds.jpg'];
+    $routes->get('/query',function ()use($app){
+        /**
+         * ('id', `firstAired`, `network`, `overview`, `seriesName`, `status`) VALUES ('82066', '2008-08-26', 'FOX (US)', 'The series follows a Federal Bureau of Investigation \\"Fringe Division\\" team based in Boston. The team uses unorthodox \\"fringe\\" science and FBI investigative techniques to investigate a series of unexplained, often ghastly occurrences, some of which are related to mysteries surrounding a parallel universe.', 'Fringe', 'Ended');
+         */
+        $array = [
+            'id'=>887841,
+            'firstAired'=>'2008-08-26',
+            'network'=>'1FOX (US)',
+            'overview'=> '1The series follows a Federal Bureau of Investigation \\"Fringe Division\\" team based in Boston. The team uses unorthodox \\"fringe\\" science and FBI investigative techniques to investigate a series of unexplained, often ghastly occurrences, some of which are related to mysteries surrounding a parallel universe.',
+            'seriesName'=> '1Fringes',
+            'status'=>'1Ended'
+        ];
+        $image_arr = ['id'=>144782, 'subKey'=>"12", 'fileName'=>'dsds.jpg'];
         try{
             $tv_show = new \App\Models\TvShow();
             $image = new \App\Models\Image();
@@ -53,20 +47,42 @@ if($app->request()->has('search')){
             dd($e->getMessage());
         }
 
-    dd($array);
+        dd($array);
 
-} else{
-    $app->view()->show('template/search.php',['hello'=>"name "]);
+    });
+
+    $routes->get('/search',function ()use($app){
+        if($app->request()->has('q')){
+            $url = "https://api.thetvdb.com/search/series?name=".urlencode($app->request()->get('q'));
+            $header = [  'Accept: application/json' ,'Content-type: application/json','Authorization: Bearer '.getenv('TVDB_TOKEN')];
+            $response = (new \App\Http\Client())->get($url,$header);
+
+            $response_mod = array_map(function ($item){
+                $item['banner'] = "http://thetvdb.com/banners/".$item['banner'];
+                return $item;
+            },$response['data']);
+            header('Content-Type: application/json');
+            return   json_encode($response_mod);
+
+
+        }else{
+            header('Content-Type: application/json');
+            return   json_encode([""]);
+        }
+    });
+
+    $routes->get('/tv-shows/id',function ($params =3){
+        return $params;
+    });
+
+
+    $response = $routes->run();
+    echo($response);
+
+
+
+}catch(Exception $e){
+    echo $e->getMessage();
 }
-
- function mapResponse($item){
-     $item['banner'] = "http://thetvdb.com/banners/".$item['banner'];
-//     $response = (new \App\Http\Client())->get($item['banner'],null, true);
-//     if($response !=200){
-//         $item['banner'] = '/assets/images/no-image.jpg';
-//     }
-     return $item;
- }
-
 
 

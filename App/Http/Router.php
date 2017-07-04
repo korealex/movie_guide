@@ -9,4 +9,27 @@
 class Router
 {
 
+    protected $request;
+    protected $routes=[];
+    function __construct()
+    {
+        $this->request = new Request();
+
+    }
+
+    public function get($uri,$closure){
+       $this->routes[$uri] = $closure;
+    }
+
+    public function run(){
+        return $this->routes[$this->request->uri]();
+    }
+
+
+
+
+
+
+
+
 }

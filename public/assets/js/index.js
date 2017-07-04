@@ -9,7 +9,7 @@ $(document).ready(function () {
         }
     }
     var loadShows = function (searchParam, callback) {
-        window.http.get('/', {search: searchParam}, function (error, response) {
+        window.http.get('/search', {q: searchParam}, function (error, response) {
             if (response) {
                 console.log(response, 1)
 

@@ -10,6 +10,7 @@ class Request
 {
     protected $input;
     protected $method;
+    public $uri;
 
     function __construct()
     {
@@ -19,7 +20,7 @@ class Request
         }elseif ($this->method == "POST"){
             $this->input= $_POST;
         }
-
+        $this->uri = $this->getCurrentUri();
     }
 
     public function get($key){
@@ -30,6 +31,15 @@ class Request
     }
     public function all(){
         return $this->input;
+    }
+
+    private function getCurrentUri()
+    {
+        $basepath = implode('/', array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 0, -1)) . '/';
+        $uri = substr($_SERVER['REQUEST_URI'], strlen($basepath));
+        if (strstr($uri, '?')) $uri = substr($uri, 0, strpos($uri, '?'));
+        $uri = '/' . trim($uri, '/');
+        return $uri;
     }
 
 }
