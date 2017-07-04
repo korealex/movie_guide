@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Models;
 
 /**
  * Created by PhpStorm.
@@ -6,7 +6,8 @@
  * Date: 07-03-17
  * Time: 11:49 PM
  */
-class Image
+class Image extends BaseModel
 {
+    protected $table  = 'image';
 
 }

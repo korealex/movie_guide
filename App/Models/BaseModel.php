@@ -11,10 +11,11 @@ abstract class BaseModel
     protected $connection = 'mysql';
     protected $primary_key = 'id';
     protected $table ;
-    protected $fillables ;
+    protected $fillable ;
     protected $hidden ;
     protected $original = [];
     protected $attributes = [];
+    protected $relations = [];
     /**
      * @var QueryBuilder
      */
@@ -27,13 +28,13 @@ abstract class BaseModel
 
     }
     private function init(){
-        $this->builder = new QueryBuilder($this->getConfig());
+        $this->builder = new QueryBuilder();
     }
     private function fill(array $attributes = []){
         $this->attributes = $attributes;
         foreach ($this->attributes as $key=>$value){
 
-            if(in_array($key,$this->fillables)){
+            if(in_array($key,$this->fillable)){
                 $this->$key = $value;
             }
         }
@@ -45,6 +46,9 @@ abstract class BaseModel
             'primary_key'=>$this->primary_key,
             'table'=>$this->table
             ];
+    }
+    public function where($key, $id){
+        return $this->builder->where($this->table,$key,"=",$id);
     }
 
     public function find($id){
@@ -61,6 +65,20 @@ abstract class BaseModel
     public function delete($id){
         return $this->builder->delete($this->table,$this->primary_key,$id);
     }
+    public function hasOne($className, $fk = 'id'){
+
+
+    }
+    public function hasMany($className, $fk = 'id'){
+        return new Relation($className,$fk,$this->id);
+    }
+    public function load($relations = []){
+        foreach ($relations as $relation){
+            $this->$relation = $this->$relation()->get();
+        }
+    }
+
+
 
 
 

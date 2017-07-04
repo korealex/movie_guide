@@ -33,13 +33,14 @@ if($app->request()->has('search')){
         'status'=>'1Ended'
     ];
         try{
-            $tv_show = new \App\Models\TvShow();
+            $tv_show = new \App\Models\TvShow(['id'=>82065]);
 //            $id = $app->queryBuilder()->insert('tvshow',$array,'id');
 //            $result = $app->queryBuilder()->where('tvshow','id','=',$id);
 //            $result = $app->queryBuilder()->all('tvshow');
 //            $result = $app->queryBuilder()->update('tvshow', $array, 'id',8208533);
 //            $result = $app->queryBuilder()->delete('tvshow', 'id',820851);
-            dd($tv_show->find(82085383));
+            $tv_show->load(['images']);
+            dd($tv_show->images);
 
         }catch (Exception $e){
             dd($e->getMessage());

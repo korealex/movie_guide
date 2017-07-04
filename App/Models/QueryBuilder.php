@@ -9,7 +9,7 @@
 class QueryBuilder
 {
     protected $table;
-    function __construct(array $config)
+    function __construct(array $config = null)
     {
         $this->connection = new \PDO(
             sprintf('mysql:host=%s;dbname=%s;port=%s', getenv('DB_HOST'), getenv('DB_NAME'), getenv('DB_PORT')),
@@ -18,7 +18,8 @@ class QueryBuilder
 
     public function where($table, $column, $operator, $query)
     {
-        $query = $this->connection->query("select * from {$table} where {$column} {$operator} {$query}");
+        $sql = "select * from {$table} where {$column} {$operator} {$query}";
+        $query = $this->connection->query($sql);
         return $query->fetchAll(\PDO::FETCH_OBJ);
     }
 
