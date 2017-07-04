@@ -6,7 +6,11 @@
  * Date: 07-03-17
  * Time: 11:50 PM
  */
-class SearchShow
+class SearchShow extends BaseModel
 {
+    protected $table  = 'show_seach';
+    protected $fillable  = ['search_id','show_id'];
+
+
 
 }

@@ -30,7 +30,7 @@ abstract class BaseModel
     private function init(){
         $this->builder = new QueryBuilder();
     }
-    private function fill(array $attributes = []){
+    public function fill(array $attributes = []){
         $this->attributes = $attributes;
         foreach ($this->attributes as $key=>$value){
 
@@ -38,6 +38,7 @@ abstract class BaseModel
                 $this->$key = $value;
             }
         }
+        return $this;
     }
 
     private function getConfig(){
@@ -50,9 +51,13 @@ abstract class BaseModel
     public function where($key, $id){
         return $this->builder->where($this->table,$key,"=",$id);
     }
+    public function whereRaw($query){
+        return $this->builder->whereRaw($this->table,$query);
+    }
 
     public function find($id){
-        return $this->builder->where($this->table,$this->primary_key,"=",$id)[0];
+        $results = $this->builder->where($this->table,$this->primary_key,"=",$id);
+        return (empty($results))?null:(array)$results[0];
     }
 
     public function update(array $attributes = []){
@@ -61,6 +66,11 @@ abstract class BaseModel
 
     public function create(array $attributes = []){
         $id =  $this->builder->insert($this->table, $attributes);
+
+        if(is_bool($id) && $id ==true){
+            return $this;
+        }
+
         $this->fill((array)$this->find($id));
         return $this;
     }
@@ -74,6 +84,10 @@ abstract class BaseModel
     public function hasMany($className, $fk = 'id'){
         return new Relation($className,$fk,$this->id);
     }
+    public function hasManyThrough($className,$pivotClassName, $fk = 'id', $other_fk = 'id'){
+        return new Relation($className,$fk,$this->id,$pivotClassName);
+    }
+
     public function load($relations = []){
         foreach ($relations as $relation){
             $this->$relation = $this->$relation()->get();
@@ -83,6 +97,8 @@ abstract class BaseModel
     public function toArray(){
         return array_merge($this->attributes, $this->relations) ;
     }
+
+
 
 
 

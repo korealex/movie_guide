@@ -18,10 +18,19 @@ class QueryBuilder
 
     public function where($table, $column, $operator, $query)
     {
-        $sql = "select * from {$table} where {$column} {$operator} {$query}";
-        $query = $this->connection->query($sql);
-        return $query->fetchAll(\PDO::FETCH_OBJ);
+        $sql = "select * from {$table} where `{$column}` {$operator} '{$query}'";
+        $query_run = $this->connection->query($sql);
+        return $query_run->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function whereRaw($table,  $query)
+    {
+        $sql = "select * from {$table} where {$query}";
+        $query_run = $this->connection->query($sql);
+
+        return $query_run->fetchAll(\PDO::FETCH_OBJ);
+    }
+
 
     public function all($table)
     {
@@ -35,12 +44,24 @@ class QueryBuilder
         $keys_string = implode(", ",$keys);
         $vals = "'".implode("', '",$data)."'";
         $sql = "INSERT INTO $table ({$keys_string}) VALUES ({$vals})";
+
         $query = $this->connection->query($sql);
 
-        if(!$query){
+
+        $id = intval($this->connection->lastInsertId());
+        if($id !=0){
+            return $this->connection->lastInsertId();
+        }elseif (isset($data[$pk]) && !empty($data[$pk])){
+            return $data[$pk];
+        }elseif ($query!=false){
+            return true;
+        }
+        if(!$query || !empty($this->connection->errorInfo()[2])){
             throw new \Exception($this->connection->errorInfo()[2]);
         }
-        return ($data[$pk]);
+
+        return $data[$pk];
+
 
     }
 

@@ -20,7 +20,7 @@ class Relation
     protected $parent_id;
 
 
-    function __construct($className, $fk, $parent_id)
+    function __construct($className, $fk, $parent_id,$pivotClassName = null)
     {
         $this->className = $className;
         $this->obj = new $className();

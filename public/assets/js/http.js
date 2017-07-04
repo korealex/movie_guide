@@ -4,7 +4,7 @@
 window.http = {
     get:function (url, params,callback) {
         console.log(url)
-        var req = $.ajax({
+        $.ajax({
             dataType: "json",
             url: url,
             data: params,
