@@ -21,6 +21,7 @@ try{
         return (new \App\Controller\TvShowController($app))->search();
     });
 
+
     $response = $app->routes()->run();
     echo($response);
     return;

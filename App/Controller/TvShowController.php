@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Models\TvShow;
+
 class TvShowController extends MainController
 {
 
@@ -23,10 +25,9 @@ class TvShowController extends MainController
 
             $response_mod = array_map(function ($item){
                 $item['banner'] = "http://thetvdb.com/banners/".$item['banner'];
-                return $item;
+                return new TvShow($item);
             },$response['data']);
-            header('Content-Type: application/json');
-            return   json_encode($response_mod);
+            return $this->successResponse($response_mod);
 
 
         }else{

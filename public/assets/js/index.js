@@ -13,7 +13,7 @@ $(document).ready(function () {
             if (response) {
                 console.log(response, 1)
 
-                var tvShows = response
+                var tvShows = response.data
                 console.log(tvShows);
                 if (tvShows.length > 0) {
                     return callback(null, tvShows);
