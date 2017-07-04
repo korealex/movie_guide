@@ -52,7 +52,7 @@ abstract class BaseModel
     }
 
     public function find($id){
-        return $this->builder->where($this->table,$this->primary_key,"=",$id);
+        return $this->builder->where($this->table,$this->primary_key,"=",$id)[0];
     }
 
     public function update(array $attributes = []){
@@ -60,7 +60,9 @@ abstract class BaseModel
     }
 
     public function create(array $attributes = []){
-        return $this->builder->insert($this->table, $attributes);
+        $id =  $this->builder->insert($this->table, $attributes);
+        $this->fill((array)$this->find($id));
+        return $this;
     }
     public function delete($id){
         return $this->builder->delete($this->table,$this->primary_key,$id);

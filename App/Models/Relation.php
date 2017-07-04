@@ -22,6 +22,7 @@ class Relation
 
     function __construct($className, $fk, $parent_id)
     {
+        $this->className = $className;
         $this->obj = new $className();
         $this->fk = $fk;
         $this->parent_id = $parent_id;
@@ -31,7 +32,21 @@ class Relation
         $this->builder = new QueryBuilder();
     }
     public function get(){
-        return $this->obj->where($this->fk,$this->parent_id);
+        $arr = [];
+        $items = $this->obj->where($this->fk,$this->parent_id);
+        foreach ($items as $item){
+            array_push($arr, new $this->className((array)$item)) ;
+        }
+        return $arr;
+    }
+    public function save(BaseModel $model){
+         $model->update([$this->fk => $this->parent_id, 'id'=>$model->id]);
+    }
+
+    public function saveMany($models){
+        foreach ($models as $model){
+            $model->update([$this->fk => $this->parent_id]);
+        }
     }
 
 }
