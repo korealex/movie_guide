@@ -17,5 +17,20 @@ class MainController
         $this->app = $app;
     }
 
+    public function successResponse(array $data = []){
+        header('Content-Type: application/json');
+        return json_encode([
+            'data'=> $data
+        ]);
+
+    }
+    public function errorResponse(\Exception $ex){
+        header('Content-Type: application/json');
+        return json_encode([
+            'error'=> $ex->getMessage()
+        ]);
+
+    }
+
 
 }

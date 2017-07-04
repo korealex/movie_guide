@@ -77,7 +77,11 @@ abstract class BaseModel
     public function load($relations = []){
         foreach ($relations as $relation){
             $this->$relation = $this->$relation()->get();
+            $this->relations[$relation] =$this->$relation;
         }
+    }
+    public function toArray(){
+        return array_merge($this->attributes, $this->relations) ;
     }
 
 
