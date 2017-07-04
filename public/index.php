@@ -26,9 +26,8 @@ try{
     return;
 
 }catch(Exception $e){
-    echo $e->getMessage();
+    (new \App\Exceptions\Handler($e))->render();
     return;
-
 }
 function handleFatalPhpError() {
 

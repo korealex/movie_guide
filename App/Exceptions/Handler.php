@@ -6,7 +6,17 @@
  * Date: 06-26-17
  * Time: 11:50 PM
  */
-class Handler extends Exception
+class Handler
 {
+    protected $exception;
+    function __construct(\Exception $exception)
+    {
+        $this->exception = $exception;
+    }
+
+    function render(){
+        echo $this->exception->getMessage();
+        return;
+    }
 
 }
