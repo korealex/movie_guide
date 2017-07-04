@@ -22,23 +22,23 @@ class Container
     {
         $this->db_config = require('../config/database.php');
         $this->request = new Request();
-        $this->builder = new QueryBuilder($this->getConnection('mysql'));
+        $this->builder = new QueryBuilder($this->connection('mysql'));
         $this->view = new View();
     }
 
-    public function getConnection($name){
+    public function connection($name){
         return $this->db_config['connections'][$name];
     }
 
-    public function getRequest(){
+    public function request(){
         return $this->request;
     }
 
-    public function getQueryBuilder(){
+    public function queryBuilder(){
         return $this->builder;
     }
 
-    public function getView(){
+    public function view(){
         return $this->view;
     }
 

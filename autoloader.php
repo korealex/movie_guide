@@ -6,10 +6,10 @@
  * Time: 01:29 AM
  */
 
-include (__DIR__.'/App/Http/Router.php');
-include (__DIR__.'/App/Http/Request.php');
-include (__DIR__.'/App/Http/Client.php');
-include (__DIR__.'/App/Models/QueryBuilder.php');
-include (__DIR__.'/App/Models/BaseModel.php');
-include (__DIR__.'/App/Models/Movies.php');
-include (__DIR__.'/App/View.php');
+include_once (__DIR__.'/App/Http/Router.php');
+include_once (__DIR__.'/App/Http/Request.php');
+include_once (__DIR__.'/App/Http/Client.php');
+include_once (__DIR__.'/App/Models/QueryBuilder.php');
+include_once (__DIR__.'/App/Models/BaseModel.php');
+include_once (__DIR__ .'/App/Models/TvShow.php');
+include_once (__DIR__.'/App/View.php');
