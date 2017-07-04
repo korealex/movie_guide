@@ -11,9 +11,9 @@ class Router
 
     protected $request;
     protected $routes=[];
-    function __construct()
+    function __construct(Request $request)
     {
-        $this->request = new Request();
+        $this->request = $request;
     }
 
     public function get($uri,\Closure $closure){

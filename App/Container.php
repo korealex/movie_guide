@@ -14,14 +14,25 @@ use App\Models\QueryBuilder;
 class Container
 {
     protected $db_config;
+    /**
+     * @var Request
+     */
     protected $request;
+    /**
+     * @var QueryBuilder
+     */
     protected $builder;
+    /**
+     * @var Router
+     */
+    protected $routes;
 
 
     function __construct()
     {
         $this->request = new Request();
         $this->view = new View();
+        $this->router = new Router($this->request);
     }
 
     public function connection($name){
@@ -38,6 +49,11 @@ class Container
 
     public function view(){
         return $this->view;
+    }
+
+    public function routes(){
+
+        return $this->router;
     }
 
 

@@ -17,5 +17,6 @@ include_once (__DIR__.'/App/Models/BaseModel.php');
 include_once (__DIR__.'/App/Models/Relation.php');
 include_once (__DIR__.'/App/Models/Image.php');
 include_once (__DIR__.'/App/Models/Episode.php');
-include_once (__DIR__ .'/App/Models/TvShow.php');
+include_once (__DIR__.'/App/Models/TvShow.php');
 include_once (__DIR__.'/App/View.php');
+include_once (__DIR__.'/App/Container.php');
