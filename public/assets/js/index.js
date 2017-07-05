@@ -1,14 +1,25 @@
 $(document).ready(function () {
 
     $('#main-content').html(window.MainContent.initHome());
-    $('#search-btn').click(find);
-    $(document).keypress(function (e) {
-        if(e.which == 13) {
-            find;
-        }
+    $('#search-btn').click(function () {
+        find(function () {
+            
+        })
     });
+    $('#main-content ').on('mousedown', '.show-card', function (e,v,c) {
+        $(e.currentTarget ).removeClass('fadeIn').addClass('bounceOut');
+    });
+    // $(document).keypress(function (e) {
+    //     if(e.which == 13) {
+    //         find;
+    //     }
+    // });
 });
 window.shows_main = [];
+var x = function () {
+    console.log(321)
+
+}
 
 var unloadShows = function () {
     var tvShows = [];
@@ -35,10 +46,8 @@ var loadShows = function (searchParam, callback) {
 
 };
 
-var find = function () {
+var find = function (callback) {
     var content = $('#search').val();
-
-
     console.log('searching for: ' + content)
     $('.search-container').addClass('is-loading');
 
@@ -63,6 +72,7 @@ var find = function () {
             })
         }
     });
+    callback();
 };
 
 var getBgUrl = function (el) {

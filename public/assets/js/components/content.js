@@ -12,8 +12,14 @@ window.MainContent = {
             return false;
             
         });
-        $('#content-data').removeClass('slideInDown').addClass('slideOutUp')
-        $('#main-content').html(window.MainContent.shoeDeails());
+        $('#content-data').addClass('slideOutUp')
+        $('#search-area').addClass('slideOutDown fadeOut')
+
+        $('#content-data').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+        function () {
+            $('#main-content').html(window.MainContent.showDetails());
+        });
+
         console.log(item,1);
     },
 
@@ -42,7 +48,7 @@ window.MainContent = {
             </div>
         </div>
     </section>
-    <section class="section" >
+    <section class="section animated" id="search-area" >
         <div class="container main-content ">
 
             <div id="TVshows">
@@ -55,12 +61,14 @@ window.MainContent = {
         `
 
     },
-    shoeDeails:function () {
-        return `<section class="section" >
+    showDetails:function () {
+        console.log(this);
+        return `<section class="section animated fadeIn" >
         <div class="container main-content ">
 
             <div id="TVshows">
                 <div class="columns is-multiline is-desktop">
+                Hola
                 </div>
 
             </div>

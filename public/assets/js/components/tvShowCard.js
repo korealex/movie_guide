@@ -9,7 +9,7 @@ TVshowCard = function (data) {
     this.network = data.network;
     this.firstAired = data.firstAired;
     this.getCard = function () {
-        return `<div class="column is-4 animated fadeIn " id="id-${this.id}" onclick="MainContent.getEpisodes(${this.id})">
+        return `<div class="column is-4 animated fadeIn show-card " id="id-${this.id}"  onclick="MainContent.getEpisodes(${this.id})">
                 <div class="card" >
                     <div class="card-image">
                         <div class=" is-16by9">
