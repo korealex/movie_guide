@@ -70,12 +70,14 @@ class TvShowController extends MainController
             }
 
 
-            return $this->successResponse($response_mod);
+             echo $this->successResponse($response_mod);
+            return true;
 
 
         }else{
             header('Content-Type: application/json');
-            return   json_encode(["No query"]);
+            echo   json_encode(["No query"]);
+            return false;
         }
 
     }

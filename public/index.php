@@ -25,7 +25,7 @@ try{
         return (new \App\Controller\TvShowController($app))->search();
     });
 
-    $app->routes()->run();
+    $response = $app->routes()->run();
     return;
 
 }catch(Exception $e){
