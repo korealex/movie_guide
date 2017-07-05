@@ -9,22 +9,35 @@
 class Router
 {
 
+    /**
+     * @var Request
+     */
     protected $request;
+    /**
+     * @var array
+     */
     protected $routes=[];
+
     function __construct(Request $request)
     {
         $this->request = $request;
     }
 
     public function get($uri,\Closure $closure){
-       $this->routes[$uri] = $closure;
+        array_push($this->routes, ['uri'=>$uri,'method'=>'GET','callback'=>$closure]);
+    }
+    public function post($uri,\Closure $closure){
+        array_push($this->routes,['uri'=>$uri,'method'=>'POST','callback'=>$closure]);
     }
 
     public function run(){
-        if (array_key_exists($this->request->uri,$this->routes)){
-            return  $this->routes[$this->request->uri]();
-        }else{
-            throw new \Exception('Http url not found');
+
+        foreach ($this->routes as $route){
+            if($this->request->uri == $route['uri'] && $this->request->method == $route['method']){
+                return $route['callback']();
+            }
+            new \Exception('Http url not found');
         }
+
     }
 }

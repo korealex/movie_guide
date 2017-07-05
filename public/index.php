@@ -12,6 +12,10 @@ try{
     $app->routes()->get('/',function ()use($app){
         return (new \App\Controller\TvShowController($app))->index();
     });
+    $app->routes()->post('/',function ()use($app){
+        return (new \App\Controller\TvShowController($app))->index();
+    });
+
 
     $app->routes()->get('/query',function ()use($app){
         return (new \App\Controller\DBController($app))->query();
@@ -21,9 +25,7 @@ try{
         return (new \App\Controller\TvShowController($app))->search();
     });
 
-
-    $response = $app->routes()->run();
-    echo($response);
+    $app->routes()->run();
     return;
 
 }catch(Exception $e){

@@ -9,7 +9,7 @@
 class Request
 {
     protected $input;
-    protected $method;
+    public $method;
     public $uri;
 
     function __construct()
