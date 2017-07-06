@@ -30,10 +30,13 @@ abstract class BaseModel
     private function init(){
         $this->builder = new QueryBuilder();
     }
-    public function fill(array $attributes = []){
+    public function fill(array $attributes){
+        if(isset($this->fillable['fileName'])){
+
+            dd($this->fillable );
+        }
         $this->attributes = $attributes;
         foreach ($this->attributes as $key=>$value){
-
             if(in_array($key,$this->fillable)){
                 $this->$key = $value;
             }

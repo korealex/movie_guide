@@ -1,7 +1,7 @@
 /**
- * Created by al on 06-29-17.
+ * Created by al on 07-06-17.
  */
-TVshowCard = function (data,index) {
+ShowDetails = function (data,index) {
 
     this.getCard = function () {
         return `<div class="column is-4 animated fadeIn show-card " data-id="${data.id}" data-index="${index}"  id="id-${data.id}">

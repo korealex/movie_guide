@@ -9,5 +9,5 @@
 class Image extends BaseModel
 {
     protected $table  = 'image';
-    protected $fillable  = ['id','subKey','fileName','resolution','show_id'];
+    protected $fillable  = ['id','subKey','fileName','resolution','show_id','keyType'];
 }

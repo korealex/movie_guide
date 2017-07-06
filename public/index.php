@@ -25,6 +25,14 @@ try{
         return (new \App\Controller\TvShowController($app))->search();
     });
 
+    $app->routes()->get('/episodes',function ()use($app){
+        return (new \App\Controller\TvShowController($app))->episodes();
+    });
+
+    $app->routes()->get('/images',function ()use($app){
+        return (new \App\Controller\TvShowController($app))->images();
+    });
+
     $response = $app->routes()->run();
     return;
 

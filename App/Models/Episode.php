@@ -6,7 +6,12 @@
  * Date: 07-03-17
  * Time: 11:50 PM
  */
-class Episode
+class Episode extends BaseModel
 {
+    protected $table  = 'episode';
+    protected $fillable  = [
+        'id','absoluteNumber','airedEpisodeNumber','airedSeason','airedSeasonID','dvdEpisodeNumber','dvdSeason',
+        'episodeName','firstAired','lastUpdated','overview','show_id'
+        ];
 
 }

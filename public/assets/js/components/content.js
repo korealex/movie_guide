@@ -25,7 +25,7 @@ window.MainContent = {
 
     initHome:function () {
         return `
-        <section class="hero is-dark is-small animated slideInDown" id="content-data">
+        <section class="hero is-dark is-small animated fadeInDown" id="content-data">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-1">
@@ -63,17 +63,40 @@ window.MainContent = {
     },
     showDetails:function () {
         console.log(this);
-        return `<section class="section animated fadeIn" >
-        <div class="container main-content ">
+        return `
 
-            <div id="TVshows">
-                <div class="columns is-multiline is-desktop">
-                Hola
-                </div>
+<section class="hero animated fadeIn is-dark is-large" id="show-details">
 
-            </div>
+<div class="hero-head" id="show-details">
+    <header class="nav">
+      <div class="container">
+        <div class="nav-left">
+           <a class="button is-small" id="back-btn">
+                    <span class="icon is-small">
+                      <i class="fa fa-arrow-left"></i>
+                    </span>
+                    <span>back to search</span>
+                </a> 
         </div>
-    </section>`;
+       
+        </div>
+    </header>
+  </div>
+
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Large title
+      </h1>
+      <h2 class="subtitle">
+        Large subtitle
+      </h2>
+      <p>When all the passengers on a plane die, FBI agent Olivia Dunham investigates the events and her partner almost dies. A desperate Olivia looks for help from Dr. Walter Bishop who has been institutionalized. Olivia, Dr. Bishop and his son Peter begin to discover what really happened on Flight 627 and begin to uncover a larger truth.</p>
+    </div>
+  </div>
+</section>`
+
+            ;
     }
 
 }
