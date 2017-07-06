@@ -1,4 +1,2 @@
-<div id="main-content">
-
-</div>
+<div id="main-content"></div>
 

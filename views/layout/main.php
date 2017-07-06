@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $title ?? "Movie Guide";?></title>
+    <title><?php echo $title ?? "TVDB";?></title>
     <link rel="stylesheet" href="/assets/css/jquery-ui.css">
     <link rel="stylesheet" href="/assets/css/bulma.css">
     <link rel="stylesheet" href="/assets/css/cosmo-bulmaswatch.min.css">
@@ -17,31 +17,3 @@
 </head>
 
 <body>
-<?php if(isset($nav)){
-    echo $nav;
-}?>
-
-<?php if(isset($content)){
-    echo $content;
-}?>
-
-<?php if(isset($footer)){
-    echo $footer;
-}?>
-
-<script src="/assets/js/jquery-3.2.1.js"></script>
-<script src="/assets/js/jquery-ui.js"></script>
-<script src="/assets/js/http.js"></script>
-<script src="/assets/js/components/content.js"></script>
-<script src="/assets/js/models/Series.js"></script>
-<script src="/assets/js/components/tvShowCard.js"></script>
-<script src="/assets/js/components/showDetails.js"></script>
-<script src="/assets/js/components/episodesCard.js"></script>
-<script src="/assets/js/index.js"></script>
-
-<?php if(isset($scripts)){
-    echo $scripts;
-}?>
-</body>
-
-</html>
