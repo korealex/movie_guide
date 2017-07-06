@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $title ?? "TVDB";?></title>
     <link rel="stylesheet" href="/assets/css/jquery-ui.css">
     <link rel="stylesheet" href="/assets/css/bulma.css">
