@@ -36,8 +36,11 @@ class Router
             if($this->request->uri == $route['uri'] && $this->request->method == $route['method']){
                 return $route['callback']();
             }
-            new \Exception('Http url not found');
+
         }
+        return header("Location: http://" . $_SERVER['HTTP_HOST']);
+        exit;
+        new \Exception('Http url not found');
 
     }
 }

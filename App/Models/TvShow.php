@@ -9,7 +9,7 @@
 class TvShow extends BaseModel
 {
     protected $table  = 'tvshow';
-    protected $fillable  = ['id','firstAired','network','overview','seriesName','status','banner'];
+    protected $fillable  = ['id','firstAired','network','overview','seriesName','status','banner', 'rating','imdbId','zap2itId','airsDayOfWeek', 'airsTime'];
 
     public function images(){
         return $this->hasMany(Image::class, 'show_id');

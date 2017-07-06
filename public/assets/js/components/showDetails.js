@@ -1,29 +1,26 @@
 /**
  * Created by al on 07-06-17.
  */
-ShowDetails = function (data,index) {
+ShowDetails = function (show_data,index) {
+    var data = show_data.selected_tv_show;
 
-    this.getCard = function () {
-        return `<div class="column is-4 animated fadeIn show-card " data-id="${data.id}" data-index="${index}"  id="id-${data.id}">
-                <div class="card" >
-                    <div class="card-image">
-                        <div class=" is-16by9">
-                            <div class="banner" data-showid="${data.id}" style='cursor:pointer; height:75px; background-image: url(${data.banner}); background-position: center; background-size: cover;
-                            ' alt="Image"></div>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-6"><strong>${data.seriesName}</strong></p>
-                                <p class="subtitle is-6">${data.network}</p>
-                                
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>`;
+
+    this.render = function () {
+        return `
+
+                  
+                  <h1 class="title">
+                  <strong>${data.seriesName}</strong>
+                  </h1>
+                  <h2 class="subtitle">
+                    ${data.network} - ${data.firstAired}  
+                  </h2>
+                  <p class="">Air time: ${data.airsDayOfWeek + " " + data.airsTime }</p>
+                   <p style=" margin-bottom: 10px;" class="">Rating: ${data.rating}</p>
+                  <p> ${data.overview}</p>
+                  <a target="_blank" style="margin-top: 10px; margin-bottom: 10px;" href="http://www.imdb.com/title/${data.imdbId}" class="button is-outlined">View more information</a>
+`;
     }
+
 }
 

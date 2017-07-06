@@ -74,7 +74,6 @@ class QueryBuilder
         ));
         $sql =  "UPDATE {$table} SET {$update_query} WHERE {$column} = {$key}";
         $query = $this->connection->query($sql);
-
         if(!$query){
             throw new \Exception($this->connection->errorInfo()[2]);
         }

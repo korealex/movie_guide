@@ -24,6 +24,7 @@ class TvShowController extends MainController
         if($this->app->request()->has('q')){
             $search_term = $this->app->request()->get('q');
             $url = "https://api.thetvdb.com/search/series?name=".urlencode($search_term);
+
             $header = [  'Accept: application/json' ,'Content-type: application/json','Authorization: Bearer '.getenv('TVDB_TOKEN')];
 
             $response= null;
@@ -39,11 +40,12 @@ class TvShowController extends MainController
                     echo   json_encode($response);
                     return ;
                 }else{
-                    $response_mod = array_map(function ($item)use($search_results){
+                    $response_mod = array_map(function ($item)use($search_results,$header){
                         $item['banner'] = "http://thetvdb.com/banners/".$item['banner'];
                         $item['overview'] = addslashes($item['overview']);
                         $item['seriesName'] = addslashes($item['seriesName']);
                         $item['network'] = addslashes($item['network']);
+
                         unset($item['aliases']);
                         $show = new TvShow();
                         $result = $show->find($item['id']);
@@ -97,12 +99,32 @@ class TvShowController extends MainController
             $tv_show_obj =new TvShow();
             $tv_show = $tv_show_obj->find($id);
 
+
+
             if(empty($tv_show)){
                 header('Content-Type: application/json');
                 echo   json_encode(["Error"=>"No tv show found."]);
                 return ;
             }
             $tv_show = $tv_show_obj->fill($tv_show);
+
+            if(!isset($tv_show->toArray()['imdbId']) || empty($tv_show->toArray()['imdbId'])){
+
+                $url_details = "https://api.thetvdb.com/series/".$id;
+                $response = (array)(new \App\Http\Client())->get($url_details,$header)['data'];
+                $item = ['imdbId'=> addslashes($response['imdbId']),
+                    'zap2itId'=> addslashes($response['zap2itId']),
+                    'rating' => addslashes($response['rating']),
+                    'airsDayOfWeek' => addslashes($response['airsDayOfWeek']),
+                    'airsTime'=> addslashes($response['airsTime']),
+                    'id'=>$response['id']
+                    ];
+
+
+                $tv_show = $tv_show_obj->fill($tv_show_obj->find($tv_show->update($item)));
+            }
+
+
             $episode = new Episode();
             $results = $episode->where('show_id',$id);
 
@@ -157,8 +179,9 @@ class TvShowController extends MainController
                 echo   json_encode(["Error"=>"Resource not found"]);
                 return ;
             }
+            $tv_show->setAttribute('episodes',$response_mod);
 
-            echo $this->successResponse($response_mod);
+            echo $this->successResponse($tv_show->toArray());
             return true;
 
 
@@ -191,7 +214,7 @@ class TvShowController extends MainController
             }
             $tv_show = $tv_show_obj->fill($tv_show);
             $image = new Image();
-            $results = $image->where('show_id',$id);
+            $results = $image->whereRaw("show_id = {$id} AND keyType = '{$type}'");
 
 
             if(empty($results)){
