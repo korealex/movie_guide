@@ -30,8 +30,21 @@ class Container
 
     function __construct()
     {
+        /**
+         * the request grabs data requested to the server and provides
+         * methods for handling it.
+         *
+         */
         $this->request = new Request();
+        /**
+         * the view class is responsible for  dispatching the view elements
+         * and integrating it with the system data
+         */
         $this->view = new View();
+        /**
+         * the router identifies the user intention to access a uri and integrates  the request and the view to
+         * respond using a closure or a controller
+         */
         $this->router = new Router($this->request);
     }
 
